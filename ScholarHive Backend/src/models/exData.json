@@ -1,0 +1,41 @@
+{
+    "name": "National Means Cum Merit Scholarship",
+    "description": "For meritorious students from economically weaker sections.",
+    "category": "Merit-based",
+    "level": "School",
+    "institution": "Government of India",
+    "ministry": "Ministry of Education",
+    "eligibility": {
+      "academic_criteria": "Minimum 55% in 8th grade",
+      "income_criteria": "Family income below ₹1,50,000 per year",
+      "category_criteria": "Applicable to all students",
+      "gender": "All",
+      "age_limit": "10-15 years"
+    },
+    "application_details": {
+      "start_date": "2024-07-01",
+      "end_date": "2024-09-30",
+      "status": "Open",
+      "apply_link": "https://scholarships.gov.in/apply",
+      "required_documents": ["Aadhar", "Income Certificate", "8th Grade Marksheet"],
+      "application_fee": "No Fee"
+    },
+    "benefits": {
+      "amount": "₹12,000 per year",
+      "duration": "4 years",
+      "renewable": true,
+      "benefits": ["Tuition Fee", "Monthly Stipend"]
+    },
+    "selection_process": {
+      "selection_process": "Exam-based",
+      "exam_required": "Yes",
+      "interview_required": "No",
+      "result_date": "2024-12-15"
+    },
+    "contact_details": {
+      "official_website": "https://scholarships.gov.in",
+      "helpline_number": "1800-123-4567",
+      "email": "support@scholarships.gov.in"
+    }
+  }
+  

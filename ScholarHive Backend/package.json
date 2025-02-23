@@ -1,0 +1,24 @@
+{
+  "name": "scholarhive-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajesh Das",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/generative-ai": "^0.22.0",
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.10.1",
+    "node-fetch": "^3.3.2",
+    "pdf-extraction": "^1.0.2",
+    "puppeteer": "^24.2.1",
+    "readline": "^1.3.0"
+  }
+}
