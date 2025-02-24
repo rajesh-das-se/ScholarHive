@@ -41,14 +41,12 @@ async function getScholarshipDetails(pdfText, scholarshipName, parameter) {
         `;
         
         const response = await genAIModel.generateContent(prompt);
-        console.log(response.response.text());
+        return response.response.text();
     }catch(err){
         console.log(`Unable to produce ${parameter} parameter value for ${scholarshipName}`);
         console.log(err);
     }
 }
-
-getScholarshipDetails("https://scholarships.gov.in/public/schemeGuidelines/DEPDGuidelines_1.pdf", "Scholarship For Top Class Education For Students With Disabilities", "age limit");
 
 // Run the pipeline
 async function extractNspDetails(pdfUrl, scholarshipName) {
@@ -68,5 +66,6 @@ async function extractNspDetails(pdfUrl, scholarshipName) {
         console.log(err);
     }
 }
+
 
 export default extractNspDetails;
