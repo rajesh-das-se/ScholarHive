@@ -1,11 +1,18 @@
 import express from 'express';
 import connectDB from './config/db.js';
 import Scholarship from './models/Scholarship.js';
+import cors from 'cors'
 
 const app= express();
 
 //Connect to MongoDB
 await connectDB();
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: "GET, POST, PUT, DELETE",
+    credentials: true,
+}))
 
 app.get("/", (req, res)=>{
     res.send("<h1>All Okay</h1>")
