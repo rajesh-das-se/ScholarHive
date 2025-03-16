@@ -5,6 +5,7 @@ import Scholarships from './pages/Scholarships'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Navbar from './layouts/Navbar'
+import Footer from './layouts/Footer'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contact/>}/>
         </Routes>
+        <Footer/>
       </Router>
     </>
   )
