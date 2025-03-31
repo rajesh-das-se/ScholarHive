@@ -1,5 +1,5 @@
 import logo from './../assets/Logo__White.png'
-import ScholarshipButton from '../components/ScholarshipButton'
+import NavigationButton from '../components/NavigationButton'
 const About=()=>{
     return (
         <>
@@ -42,7 +42,7 @@ const About=()=>{
                 </div>
 
                 <div className='text-center'>
-                    <ScholarshipButton/>
+                <NavigationButton buttonText='Explore Scholarships' destinationPage='/scholarships' width={6} height={3} />
                 </div>
 
             </div>
