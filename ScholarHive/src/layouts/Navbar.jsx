@@ -7,7 +7,7 @@ import NavigationButton from './../components/NavigationButton'
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <nav className='bg-white text-gray-900 shadow-md sticky top-0'>
+        <nav className='bg-white text-gray-900 shadow-md sticky top-0 h-[7vh]'>
             <div className='max-w-6xl mx-auto flex space-x-2 md:space-x-4 justify-between items-center p-3'>
 
                 {/* Mobile Menu Button */}
@@ -27,8 +27,8 @@ const Navbar = () => {
                 {/* Desktop  Search bar & sign in, sign up buttons */}
                 <div className='hidden md:flex items-center space-x-2'>
                     <input type='text' placeholder='Search..' className='border rounded-lg h-8 w-40 px-2 py-1 focus:outline-none  focus:ring-2 focus:ring-blue-600'></input>
-                    <Link to='/signin' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>SignIn</Link>
-                    <Link to='/signup' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>SignUp</Link>
+                    <Link to='/signin' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>Sign In</Link>
+                    <Link to='/signup' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>Sign Up</Link>
                 </div>
 
             </div>
