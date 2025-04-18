@@ -1,48 +1,52 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import Logo from '../components/Logo'
 import { X, Menu } from 'lucide-react'
-import NavigationButton from './../components/NavigationButton'
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <nav className='bg-white text-gray-900 shadow-md sticky top-0 h-[7vh]'>
-            <div className='max-w-6xl mx-auto flex space-x-2 md:space-x-4 justify-between items-center p-3'>
-
-                {/* Mobile Menu Button */}
-                <Menu className='md:hidden' onClick={() => { setIsOpen(!isOpen) }} />
-
-                {/* Logo  */}
-                <Link to='/' className='text-xl font-bold text-blue-600'>ScholarHive</Link>
-
-                {/* Desktop  Navigation Links*/}
-                <div className='hidden md:flex md:flex-1 md:justify-center md:space-x-3'>
-                    <Link to='/' className='hover:text-blue-600'>Home</Link>
-                    <Link to='/scholarships' className='hover:text-blue-600'>Scholarships</Link>
-                    <Link to='/about' className='hover:text-blue-600'>About</Link>
-                    <Link to='/contact' className='hover:text-blue-600'>Contact</Link>
+        <nav className='bg-white text-gray-900 sticky top-0 z-50 h-[7vh]'>
+            <div className='mx-auto px-6 md:px-16 py-3 flex justify-between items-center'>
+                {/* Left  */}
+                <div className='flex items-center space-x-4'>
+                    {/* Mobile Menu Button */}
+                    <Menu
+                        className='lg:hidden w-6 h-6 cursor-pointer'
+                        onClick={() => { setIsOpen(!isOpen) }}
+                    />
+                    <Logo size='3'/>
                 </div>
 
-                {/* Desktop  Search bar & sign in, sign up buttons */}
-                <div className='hidden md:flex items-center space-x-2'>
-                    <input type='text' placeholder='Search..' className='border rounded-lg h-8 w-40 px-2 py-1 focus:outline-none  focus:ring-2 focus:ring-blue-600'></input>
-                    <Link to='/signin' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>Sign In</Link>
-                    <Link to='/signup' className='bg-blue-600 px-3.5 py-1 rounded-sm text-white font-semibold shadow-md hover:bg-blue-700'>Sign Up</Link>
+                {/* Center: Desktop  Navigation Links*/}
+                <div className='hidden lg:flex items-center space-x-8 text-[16px] font-medium text-gray-800'>
+                    <Link to='/' className="hover:text-blue-600 transitio">Home</Link>
+                    <Link to='/scholarships' className='hover:text-blue-600 transition'>Scholarships</Link>
+                    <Link to='/about' className='hover:text-blue-600 transition'>About</Link>
+                    <Link to='/contact' className='hover:text-blue-600 transition'>Contact</Link>
                 </div>
+
+                {/* Right: Desktop  Search bar & sign in, sign up buttons */}
+                <div className='hidden lg:flex items-center space-x-4'>
+                    <input type='text' placeholder='Search' className='h-7.5 w-40 border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
+                    <Link to='/signin' className='px-4 py-1 text-sm font-semibold text-white border border-blue-600 bg-blue-600 rounded hover:bg-blue-700 transition shadow-sm'>Sign In</Link>
+                    <Link to='/signup' className='px-4 py-1 text-sm font-semibold text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition shadow-sm'>Sign Up</Link>
+                </div>
+
 
             </div>
             {/* Mobile  Navigation Links*/}
             {isOpen && (
-                <div className='md:hidden fixed inset-0 bg-white w-3/4 h-full shadow-lg rounded-lg flex flex-col space-y-4 p-6'>
+                <div className={`lg:hidden fixed inset-0 bg-white w-3/4 h-full shadow-lg flex flex-col space-y-5 p-6 z-50 transform transition-transform duration-10000 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <X className='cursor-pointer self-end' onClick={() => { setIsOpen(!isOpen) }} />
-                    <input type='text' placeholder='Search..' className='border rounded-lg px-4 py-2 focus:outline-none  focus:ring-2 focus:ring-blue-600'></input>
+                    <input type='text' placeholder='Search' className='border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
                     <Link to='/' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Home</Link>
                     <Link to='/scholarships' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Scholarships</Link>
                     <Link to='/about' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>About</Link>
                     <Link to='/contact' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Contact</Link>
-                    <Link to="/signin" className="bg-blue-600 px-4 py-2 rounded-lg text-white font-semibold shadow-md hover:bg-blue-700 text-center" onClick={() => setIsOpen(false)}>Sign In</Link>
-                    <Link to="/signup" className="bg-blue-600 px-4 py-2 rounded-lg text-white font-semibold shadow-md hover:bg-blue-700 text-center" onClick={() => setIsOpen(false)}>Sign Up</Link>
+                    <Link to="/signin" className="border border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 text-center" onClick={() => setIsOpen(false)}>Sign In</Link>
+                    <Link to="/signup" className="border border-blue-600 bg-white text-blue-600 px-4 py-2 rounded-md font-semibold hover:bg-blue-50 text-center" onClick={() => setIsOpen(false)}>Sign Up</Link>
                 </div>
             )}
         </nav>

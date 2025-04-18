@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../components/Logo";
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const SignUp = () => {
     return (
         <div className="min-h-[calc(100vh-7vh)] flex items-center justify-center bg-white px-4">
             <div className="w-full max-w-md border border-gray-400 rounded-xl shadow-md p-8">
-                <h1 className="text-2xl font-bold text-center text-blue-600 mb-2">ScholarHive</h1>
+                <p className="text-center"><Logo size='2' /></p>
                 <p className="text-center text-gray-600 mb-6">Create your account</p>
                 <form onSubmit={handleSignIn} className="space-y-4">
                     <div>
