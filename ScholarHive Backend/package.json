@@ -13,10 +13,13 @@
   "dependencies": {
     "@google/generative-ai": "^0.22.0",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.1",
+    "morgan": "^1.10.0",
     "node-fetch": "^3.3.2",
     "pdf-extraction": "^1.0.2",
     "puppeteer": "^24.2.1",

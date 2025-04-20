@@ -2,9 +2,8 @@ import ScholarshipCard from "../components/ScholarshipCard";
 import useFetch from "../hooks/usefetch";
 
 const Scholarships = () => {
+    const [scholarships, isLoading, error] =useFetch(import.meta.env.VITE_API_URL+"/api/scholarships");
 
-    const [scholarships, isLoading, error] =useFetch("http://localhost:3000/scholarships");
-    
     return (
         <>
             <div className='max-w-6xl mx-auto px-6 py-8 text-gray-800 min-h-screen'>

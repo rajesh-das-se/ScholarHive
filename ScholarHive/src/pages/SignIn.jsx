@@ -1,14 +1,46 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState} from "react";
+import { Link, useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
 import Logo from "../components/Logo";
 
 const SignIn = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [successMsg, setSuccessMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const handleSignIn=(e)=>{
+    useEffect(()=>{
+        if(location.state && location.state.success){
+            setSuccessMsg(location.state.success);
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state])
+
+    const handleSignIn= async (e)=>{
         e.preventDefault();
-        console.log(email, password);
+        setSuccessMsg("");
+        setErrorMsg("");
+
+        try{
+            const res= await axios.post(import.meta.env.VITE_API_URL + "/api/auth/signin", {
+                email, 
+                password
+            });
+
+            const {token} =res.data;
+
+            localStorage.setItem("token", token);
+            navigate("/dashboard");
+
+        }catch(err){
+            if(err.response && err.response.data && err.response.data.error){
+                setErrorMsg(err.response.data.error);
+            }else{
+                setErrorMsg("Something went wrong. Please try again.");
+            }
+        }
     }
 
     return (
@@ -16,11 +48,21 @@ const SignIn = ()=>{
             <div className="w-full max-w-md border border-gray-400 rounded-xl shadow-md p-8">
                 <p className="text-center"><Logo size='2'/></p>
                 <p className="text-center text-gray-600 mb-6">Sign in to your account</p>
+                {successMsg && (
+                    <div className="bg-green-100 text-green-700 border border-green-300 p-2 rounded-md text-sm mb-4">
+                        {successMsg}
+                    </div>
+                )}
+                {errorMsg && (
+                    <div className="bg-red-100 text-red-700 border border-red-300 p-2 rounded-md text-sm mb-4">
+                        {errorMsg}
+                    </div>
+                )}
                 <form onSubmit={handleSignIn} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input 
-                        type="text"
+                        type="email"
                         required
                         value={email}
                         onChange={(e)=>{setEmail(e.target.value)}}

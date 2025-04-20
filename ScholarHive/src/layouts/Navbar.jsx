@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from '../components/Logo'
 import { X, Menu } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <nav className='bg-white text-gray-900 sticky top-0 z-50 h-[7vh]'>
+        <nav className='bg-white text-gray-900 sticky top-0 h-[7vh]'>
             <div className='mx-auto px-6 md:px-16 py-3 flex justify-between items-center'>
                 {/* Left  */}
                 <div className='flex items-center space-x-4'>
@@ -16,7 +17,7 @@ const Navbar = () => {
                         className='lg:hidden w-6 h-6 cursor-pointer'
                         onClick={() => { setIsOpen(!isOpen) }}
                     />
-                    <Logo size='3'/>
+                    <Logo size='3' />
                 </div>
 
                 {/* Center: Desktop  Navigation Links*/}
@@ -37,18 +38,26 @@ const Navbar = () => {
 
             </div>
             {/* Mobile  Navigation Links*/}
-            {isOpen && (
-                <div className={`lg:hidden fixed inset-0 bg-white w-3/4 h-full shadow-lg flex flex-col space-y-5 p-6 z-50 transform transition-transform duration-10000 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                    <X className='cursor-pointer self-end' onClick={() => { setIsOpen(!isOpen) }} />
-                    <input type='text' placeholder='Search' className='border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
-                    <Link to='/' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Home</Link>
-                    <Link to='/scholarships' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Scholarships</Link>
-                    <Link to='/about' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>About</Link>
-                    <Link to='/contact' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Contact</Link>
-                    <Link to="/signin" className="border border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 text-center" onClick={() => setIsOpen(false)}>Sign In</Link>
-                    <Link to="/signup" className="border border-blue-600 bg-white text-blue-600 px-4 py-2 rounded-md font-semibold hover:bg-blue-50 text-center" onClick={() => setIsOpen(false)}>Sign Up</Link>
-                </div>
-            )}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ x: '-100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '-100%' }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className={`lg:hidden fixed inset-0 bg-white w-3/4 h-full shadow-lg flex flex-col space-y-5 p-6 z-50`}
+                    >
+                        <X className='cursor-pointer self-end' onClick={() => { setIsOpen(!isOpen) }} />
+                        <input type='text' placeholder='Search' className='border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
+                        <Link to='/' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Home</Link>
+                        <Link to='/scholarships' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Scholarships</Link>
+                        <Link to='/about' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>About</Link>
+                        <Link to='/contact' className='hover:text-blue-600' onClick={() => { setIsOpen(!isOpen) }}>Contact</Link>
+                        <Link to="/signin" className="border border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 text-center" onClick={() => setIsOpen(false)}>Sign In</Link>
+                        <Link to="/signup" className="border border-blue-600 bg-white text-blue-600 px-4 py-2 rounded-md font-semibold hover:bg-blue-50 text-center" onClick={() => setIsOpen(false)}>Sign Up</Link>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     )
 }

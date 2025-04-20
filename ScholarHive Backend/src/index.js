@@ -1,7 +1,8 @@
 import express from 'express';
 import connectDB from './config/db.js';
-import Scholarship from './models/Scholarship.js';
 import cors from 'cors'
+import Scholarship from './models/scholarship.model.js';
+import authRoutes from './routes/auth.routes.js'
 
 const app= express();
 
@@ -9,19 +10,26 @@ const app= express();
 await connectDB();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.ORIGIN,
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
 }))
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.get("/", (req, res)=>{
     res.send("<h1>All Okay</h1>")
 })
 
-app.get("/scholarships", async (req, res)=>{
+app.use('/api/auth', authRoutes);
+
+app.get("/api/scholarships", async (req, res)=>{
     const scholarshipsData= await Scholarship.find();
     res.json(scholarshipsData);
 })
+
+
 
 app.use((req, res)=>{
     res.status(404).send("<h1>Path Does Not Exist: 404</h1>")
