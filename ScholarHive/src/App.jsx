@@ -20,13 +20,13 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar/>
         <Routes>
           <Route path='/' element={isAuthenticated?<Dashboard user={user}/>:<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signin' element={<SignIn/>} />
+          <Route path='/signup' element={<SignUp/>} />
           <Route path='/dashboard' element={isAuthenticated?<Dashboard user={user}/>:<SignIn/>} />
           <Route path='/scholarships' element={isAuthenticated?<Scholarships/>:<SignIn/>} />
           <Route path="*" element={<Page404 />} />

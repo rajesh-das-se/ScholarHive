@@ -2,6 +2,7 @@ import { useEffect, useState} from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Logo from "../components/Logo";
+import useAuth from "../hooks/useAuth";
 
 const SignIn = ()=>{
     const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const SignIn = ()=>{
     const [errorMsg, setErrorMsg] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
+    const {verifyToken}=useAuth()
 
     useEffect(()=>{
         if(location.state && location.state.success){
@@ -19,6 +21,7 @@ const SignIn = ()=>{
     }, [location.state])
 
     const handleSignIn= async (e)=>{
+        console.log("In Sign in function");
         e.preventDefault();
         setSuccessMsg("");
         setErrorMsg("");
@@ -32,14 +35,18 @@ const SignIn = ()=>{
             const {token} =res.data;
 
             localStorage.setItem("token", token);
+            await verifyToken();
             navigate("/dashboard");
+            console.log("sign in done");
 
         }catch(err){
             if(err.response && err.response.data && err.response.data.error){
                 setErrorMsg(err.response.data.error);
             }else{
+                console.log(err);
                 setErrorMsg("Something went wrong. Please try again.");
             }
+            console.log("sign in error");
         }
     }
 

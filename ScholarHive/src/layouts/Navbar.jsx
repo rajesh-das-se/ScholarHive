@@ -3,10 +3,23 @@ import { useState } from 'react'
 import Logo from '../components/Logo'
 import { X, Menu } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate= useNavigate();
+    const {isAuthenticated, user, verifyToken}= useAuth();
+
+    const handleLogout= async ()=>{
+        console.log("In Logout Handler");
+        localStorage.clear("token");
+        await verifyToken();
+        console.log("LogOut");
+        navigate('/')
+    }
+
     return (
         <nav className='bg-white text-gray-900 sticky top-0 h-[7vh]'>
             <div className='mx-auto px-6 md:px-16 py-3 flex justify-between items-center'>
@@ -27,13 +40,19 @@ const Navbar = () => {
                     <Link to='/about' className='hover:text-blue-600 transition'>About</Link>
                     <Link to='/contact' className='hover:text-blue-600 transition'>Contact</Link>
                 </div>
-
-                {/* Right: Desktop  Search bar & sign in, sign up buttons */}
-                <div className='hidden lg:flex items-center space-x-4'>
-                    <input type='text' placeholder='Search' className='h-7.5 w-40 border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
-                    <Link to='/signin' className='px-4 py-1 text-sm font-semibold text-white border border-blue-600 bg-blue-600 rounded hover:bg-blue-700 transition shadow-sm'>Sign In</Link>
-                    <Link to='/signup' className='px-4 py-1 text-sm font-semibold text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition shadow-sm'>Sign Up</Link>
-                </div>
+                {isAuthenticated ?
+                    <button onClick={handleLogout} className='px-4 py-1 text-sm font-semibold text-red-600 border border-red-600 rounded hover:bg-blue-50 transition shadow-sm'>Log Out</button> :
+                    (
+                        <>
+                            {/* Right: Desktop  Search bar & sign in, sign up buttons */}
+                            < div className='hidden lg:flex items-center space-x-4'>
+                                <input type='text' placeholder='Search' className='h-7.5 w-40 border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600'></input>
+                                <Link to='/signin' className='px-4 py-1 text-sm font-semibold text-white border border-blue-600 bg-blue-600 rounded hover:bg-blue-700 transition shadow-sm'>Sign In</Link>
+                                <Link to='/signup' className='px-4 py-1 text-sm font-semibold text-blue-600 border border-blue-600 rounded hover:bg-blue-50 transition shadow-sm'>Sign Up</Link>
+                            </div>
+                        </>
+                    )
+                }
 
 
             </div>
@@ -58,7 +77,7 @@ const Navbar = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav>
+        </nav >
     )
 }
 
