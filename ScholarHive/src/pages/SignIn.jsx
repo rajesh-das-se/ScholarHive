@@ -1,8 +1,8 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState, useContext} from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Logo from "../components/Logo";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
 
 const SignIn = ()=>{
     const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const SignIn = ()=>{
     const [errorMsg, setErrorMsg] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
-    const {verifyToken}=useAuth()
+    const {signIn}=useContext(AuthContext);
 
     useEffect(()=>{
         if(location.state && location.state.success){
@@ -32,10 +32,9 @@ const SignIn = ()=>{
                 password
             });
 
-            const {token} =res.data;
-
-            localStorage.setItem("token", token);
-            await verifyToken();
+            const {token, user} =res.data;
+            console.log(res.data);
+            signIn(token, user);
             navigate("/dashboard");
             console.log("sign in done");
 

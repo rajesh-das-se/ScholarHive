@@ -1,24 +1,17 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext} from 'react'
 import Logo from '../components/Logo'
 import { X, Menu } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
+import { AuthContext } from '../context/AuthContext'
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate= useNavigate();
-    const {isAuthenticated, user, verifyToken}= useAuth();
+    const {isAuthenticated, user, signOut}= useContext(AuthContext);
 
-    const handleLogout= async ()=>{
-        console.log("In Logout Handler");
-        localStorage.clear("token");
-        await verifyToken();
-        console.log("LogOut");
-        navigate('/')
-    }
 
     return (
         <nav className='bg-white text-gray-900 sticky top-0 h-[7vh]'>
@@ -41,7 +34,7 @@ const Navbar = () => {
                     <Link to='/contact' className='hover:text-blue-600 transition'>Contact</Link>
                 </div>
                 {isAuthenticated ?
-                    <button onClick={handleLogout} className='px-4 py-1 text-sm font-semibold text-red-600 border border-red-600 rounded hover:bg-blue-50 transition shadow-sm'>Log Out</button> :
+                    <button onClick={signOut} className='px-4 py-1 text-sm font-semibold text-red-600 border border-red-600 rounded hover:bg-blue-50 transition shadow-sm'>Log Out</button> :
                     (
                         <>
                             {/* Right: Desktop  Search bar & sign in, sign up buttons */}

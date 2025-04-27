@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Scholarships from './pages/Scholarships'
@@ -9,12 +9,11 @@ import SignUp from './pages/SignUp'
 import Navbar from './layouts/Navbar'
 import Dashboard from './pages/Dashboard'
 import Page404 from './pages/Page404'
-import ProtectedRoute from './components/ProtectedRoute'
-import useAuth from './hooks/useAuth'
+import { AuthContext } from './context/AuthContext'
 
 function App() {
 
-  const {isAuthenticated, user} = useAuth();
+  const {isAuthenticated, user} = useContext(AuthContext);
   
 
   return (
